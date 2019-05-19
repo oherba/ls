@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 01:53:50 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 02:13:36 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 02:50:23 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,8 +266,16 @@ int ls_param(int ac ,char **av, int *k)
     i = 1;
     while ( i < ac)
     {
+
+            if (ft_strcmp(av[i],"--") == 0)
+            {
+                i++;
+                return (i);
+
+            }
         if (av[i][0] == '-' && av[i][1] != '-')
         {
+        
             if (vef(av[i],k) == -1)
             {
                 
@@ -321,14 +329,15 @@ t_ls1 *ls_open(int ac, char **av,int *k)
      t_ls1   *tmp;
    //   t_ls1   *tmp_2;
      t_ls1    *file;
-     int i;
+     int i = 2;
      t_d d;
      t_d d_2;
 
     tmp = NULL;
     ft_0(&d);
      ft_0(&d_2);
-    i = ls_param(ac,av,k);
+    if (ft_strcmp(av[1],"--") != 0)
+        i = ls_param(ac,av,k);
      ft_sort(av, i,ac - 1);
     if (i == ac)
         ft_search(&tmp,&d,".", *k);
