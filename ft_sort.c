@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 01:53:50 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 02:13:36 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 16:06:01 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,16 @@ static int vef(char *s, int *t)
     while (s[++i])
     {
         if (s[i] == 'l')
+        { 
+            if (  ((*t & C) == C))
+            {
+                 *t ^= C;
+
+            }
             *t |= L;
+
+        }
+           
         else if (s[i] == 'r')
             *t |= R1;
         else if (s[i] == 'a')
@@ -215,6 +224,16 @@ static int vef(char *s, int *t)
             *t |= F;
         else if (s[i] == 'S')
             *t |= S;
+         else if (s[i] == '1')
+         {
+            if (  ((*t & L) == L))
+            {
+                 *t ^= L;
+
+            }
+            *t |= C;
+         }
+            
         else if (s[i] == 'G')
             *t |= G;
         else if (s[i] == 'u')
@@ -274,6 +293,7 @@ static int vef(char *s, int *t)
 //     Sort_2(a,j + 1,n); 
 // }
 
+
 int ls_param(int ac ,char **av, int *k)
 {
     int i;
@@ -282,8 +302,16 @@ int ls_param(int ac ,char **av, int *k)
     i = 1;
     while ( i < ac)
     {
+
+            if (ft_strcmp(av[i],"--") == 0)
+            {
+                i++;
+                return (i);
+
+            }
         if (av[i][0] == '-' && av[i][1] != '-')
         {
+        
             if (vef(av[i],k) == -1)
             {
                 
@@ -337,13 +365,14 @@ t_ls1 *ls_open(int ac, char **av,int *k)
      t_ls1   *tmp;
    //   t_ls1   *tmp_2;
      t_ls1    *file;
-     int i;
+     int i = 2;
      t_d d;
      t_d d_2;
 
     tmp = NULL;
     ft_0(&d);
      ft_0(&d_2);
+    //if (ft_strcmp(av[1],"--") != 0)
     i = ls_param(ac,av,k);
      ft_sort(av, i,ac - 1);
     if (i == ac)
@@ -373,3 +402,102 @@ t_ls1 *ls_open(int ac, char **av,int *k)
     }
     return (tmp);
 }
+// int ls_param(int ac ,char **av, int *k)
+// {
+//     int i;
+    
+    
+//     i = 1;
+//     while ( i < ac)
+//     {
+//         if (av[i][0] == '-' && av[i][1] != '-')
+//         {
+//             if (vef(av[i],k) == -1)
+//             {
+                
+//                 ft_putendl("usage: ls [-ugltsarRfd1] [file ...]");
+//                 exit(1);   
+//             }
+                 
+//         }
+//         else
+//             break;
+        
+//         i++;
+//     }
+//     return (i);
+// }
+
+//  void ft_file(t_d *d,t_ls1 *lst,int flag)
+//  {
+//     struct stat ss;
+//     int n;
+
+//     if (lst)
+//         {
+//             if ((flag & L) == L)
+//             { 
+//                     while(lst)
+//                     {
+                          
+//                         lstat(lst->p,&ss);
+//                         ft_lsl(lst->p,ss,d, flag);
+//                         lst = lst->next;
+//                     }
+                
+
+//             }
+//             else
+//             {
+//                   n = ft_8(d->pmax);
+//                 ft_printbonus(lst ,n);
+//             }
+            
+//            d->file = 0;
+
+//         }
+//  }
+//     //bubbleSort_2(av,ac);
+// t_ls1 *ls_open(int ac, char **av,int *k)
+// {
+//      struct stat ssb;
+//      //int t[111];
+//      t_ls1   *tmp;
+//    //   t_ls1   *tmp_2;
+//      t_ls1    *file;
+//      int i;
+//      t_d d;
+//      t_d d_2;
+
+//     tmp = NULL;
+//     ft_0(&d);
+//      ft_0(&d_2);
+//     i = ls_param(ac,av,k);
+//      ft_sort(av, i,ac - 1);
+//     if (i == ac)
+//         ft_search(&tmp,&d,".", *k);
+//     while (av[i])
+//     {
+//         if ( 0 > lstat(av[i],&ssb))
+//         {
+//             ft_putstr("ls: ");
+//             ft_putstr(av[i]);
+//             ft_putendl(": No such file or directory"); 
+//         }
+//         else if (S_ISDIR(ssb.st_mode) && (*k & D) != D)
+//             ft_search(&tmp,&d,av[i], *k);  
+//         else
+//         {
+//             d.path = ft_strdup("."); 
+//             ft_search(&file,&d_2,av[i], *k); 
+//         }
+//         i++;
+//     }
+//     if (file)
+//     {
+//         d_2.file = 1;
+//         ft_file(&d_2,file,*k);
+//         ft_putchar('\n');
+//     }
+//     return (tmp);
+// }

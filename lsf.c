@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 23:47:31 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 00:34:17 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:53:15 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_ls1 *lls(char path[],t_d *d,int flag)
     return (tmp);
 }
 
+
 void ls(char path[], int flag) 
 {
     t_ls1 *tmp_2;
@@ -55,11 +56,25 @@ void ls(char path[], int flag)
         puterror(path);
         return ;
     }
-        
-    n = ft_8(d.pmax);
-    ft_printbonus(tmp_2 ,n);
+    if ((flag & C) != C)
+    {   
+        n = ft_8(d.pmax);
+        ft_printbonus(tmp_2 ,n);
+
+    } 
+    else
+    {
+         while (tmp_2)
+            {
+                ft_putendl(tmp_2->p);
+                tmp_2 = tmp_2->next;
+            }
+    }
+
+   
 
 }
+
 int main(int argc ,char **argv)
 {
     t_ls1 *lst;

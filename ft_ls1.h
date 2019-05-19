@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 23:34:53 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 01:55:44 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:02:41 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,21 @@
 #include <pwd.h>
 #include <stdio.h>
 
-#define	FLAGS	0b0000000000000
-#define	L   	0b0000000000001
-#define	R1		0b0000000000010
-#define	A		0b0000000000100
-#define	R		0b0000000001000
-#define	T		0b0000000010000
-#define	F1		0b0000000100000
-#define	F	    0b0000001000000
-#define	S		0b0000010000000
-#define	S1		0b0000100000000
-#define	G1		0b0001000000000
-#define	U		0b0010000000000
-#define	D		0b0100000000000
-#define	G		0b1000000000000
+#define	FLAGS	0b00000000000000
+#define	L   	0b00000000000001
+#define	R1		0b00000000000010
+#define	A		0b00000000000100
+#define	R		0b00000000001000
+#define	T		0b00000000010000
+#define	F1		0b00000000100000
+#define	F	    0b00000001000000
+#define	S		0b00000010000000
+#define	S1		0b00000100000000
+#define	G1		0b00001000000000
+#define	U		0b00010000000000
+#define	D		0b00100000000000
+#define	G		0b01000000000000
+#define	C		0b10000000000000
 
 
 typedef struct s_d

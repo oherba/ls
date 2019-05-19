@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 01:51:43 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 02:18:38 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:34:18 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,7 +396,8 @@ void ft_lsl(char *path, struct stat sbuf,t_d *d,int flag)
                 }
                 else
                 {
-                    if (len(d->mnmax))
+                    
+                    if (d->mnmax > 0)
                     {
                         a = len(d->mnmax) + len(d->mjmax) + 2;
                     }
