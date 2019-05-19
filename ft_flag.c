@@ -202,6 +202,8 @@ void    ft_readlink(char *path,mode_t d, int flag,int f)
 	int i;
 
 	i = 0;
+    if (n == 0)
+        return (1);
 	while (n > 0)
 	{
 		n /= 10;
@@ -355,12 +357,21 @@ void ft_printbonus(t_ls1 *alst,int n)
     }
 }
 
+/*void ft_mjr_mnr(dev_t dev,int mjmax,int mnmax)
+{
+    ft_put_1(major(dev),len(d->mjmax));
+    ft_put_1(minor(dev),len(d->mnmax));
 
+    ft_putnbr((int)major(dev));
+    ft_putstr("...");
+    ft_putnbr((int)minor(dev));
+}*/
 void ft_lsl(char *path, struct stat sbuf,t_d *d,int flag)
 {
     (void)flag;
      struct passwd * pwentp;
      struct group  * grpt;
+     int a = 0;
                 print_perms(sbuf.st_mode,path);
                 ft_put_1((int)sbuf.st_nlink,len(d->lmax) +1);
                   ft_putstr(" "); 
@@ -375,8 +386,28 @@ void ft_lsl(char *path, struct stat sbuf,t_d *d,int flag)
                      ft_put_2(grpt->gr_name,d->grmax);
                      ft_putstr("  ");
                 }
-                   
-                ft_put_1((int)sbuf.st_size,len(d->smax));
+                if (S_ISCHR(sbuf.st_mode) || S_ISBLK(sbuf.st_mode))
+                {
+                    ft_put_1(major(sbuf.st_rdev),len(d->mjmax));
+                    //ft_putnbr(d->mjmax);
+                    ft_putstr(", ");
+                    //ft_putnbr(d->mnmax);
+                    ft_put_1(minor(sbuf.st_rdev),len(d->mnmax));
+                }
+                else
+                {
+                    if (len(d->mnmax))
+                    {
+                        a = len(d->mnmax) + len(d->mjmax) + 2;
+                    }
+                    else
+                    {
+                        a = len(d->smax);
+                    }
+                    
+                     ft_put_1((int)sbuf.st_size,a);
+                }
+               
                 ft_putstr(" ");
                 ft_putstr(ft_strsub(ctime(&sbuf.st_mtime),4,12));
                  ft_putstr(" "); 
@@ -389,6 +420,8 @@ void    ft_0(t_d *d)
        d->grmax = 0;
        d->pwmax = 0;
        d->smax = 0;
+       d->mnmax = 0;
+       d->mjmax = 0;
        d->bsmax = 0;
        d->total = 0;
        d->file = 0;

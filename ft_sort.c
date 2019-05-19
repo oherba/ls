@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 01:53:50 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 02:50:23 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 02:13:36 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ if ((d->smax < new->s))
          d->smax = new->s;
 if (d->pmax < (int)ft_strlen(new->p)) 
          d->pmax  = ft_strlen(new->p);
+
 if (((flag & L) == L))
    {
 
@@ -29,6 +30,13 @@ if (((flag & L) == L))
                 d->grmax  = ft_strlen(new->gr) ;
          if ((d->lmax < (new->ln)))
                 d->lmax  = (new->ln) ;
+        if ((d->mjmax < (new->major)))
+                d->mjmax  = (new->major) ;
+        //printf("mj =%d\n",d->mjmax);
+       
+        if ((d->mnmax < (new->minor)))
+                d->mnmax  = (new->minor) ;
+        //printf("mn =%d\n",d->mnmax);
    }
 
 }
@@ -67,6 +75,8 @@ t_ls1 *ft_alstnew(char *t, t_d *d,int flag)
     return (NULL);
     if (!(new = (t_ls1*)malloc(sizeof(t_ls1))))
         return (NULL);
+    new->minor = 0;
+    new->major = 0;
     new->st = ss1.st_mode;
     new->p = ft_strdup(t);
     if ((((flag & T )== T) || ((flag & L) == L)) && ((flag & U )!= U))
@@ -75,7 +85,13 @@ t_ls1 *ft_alstnew(char *t, t_d *d,int flag)
     {
       new->t = ss1.st_atime;
     }
-    
+    if (S_ISCHR(ss1.st_mode) || S_ISBLK(ss1.st_mode))
+    {
+        new->major = major(ss1.st_rdev);
+       
+        new->minor = minor(ss1.st_rdev);
+        // printf("new->min =%d\n",new->minor);
+    }
     if (((flag & S) == S)|| ((flag & L) == L)) 
             new->s = ss1.st_size;
     
@@ -266,16 +282,8 @@ int ls_param(int ac ,char **av, int *k)
     i = 1;
     while ( i < ac)
     {
-
-            if (ft_strcmp(av[i],"--") == 0)
-            {
-                i++;
-                return (i);
-
-            }
         if (av[i][0] == '-' && av[i][1] != '-')
         {
-        
             if (vef(av[i],k) == -1)
             {
                 
@@ -329,15 +337,14 @@ t_ls1 *ls_open(int ac, char **av,int *k)
      t_ls1   *tmp;
    //   t_ls1   *tmp_2;
      t_ls1    *file;
-     int i = 2;
+     int i;
      t_d d;
      t_d d_2;
 
     tmp = NULL;
     ft_0(&d);
      ft_0(&d_2);
-    if (ft_strcmp(av[1],"--") != 0)
-        i = ls_param(ac,av,k);
+    i = ls_param(ac,av,k);
      ft_sort(av, i,ac - 1);
     if (i == ac)
         ft_search(&tmp,&d,".", *k);

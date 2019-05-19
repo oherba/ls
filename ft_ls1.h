@@ -6,7 +6,7 @@
 /*   By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 23:34:53 by yelazrak          #+#    #+#             */
-/*   Updated: 2019/05/19 02:50:25 by yelazrak         ###   ########.fr       */
+/*   Updated: 2019/05/19 01:55:44 by yelazrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_d
      int lmax;
     char *path;
     int file;
+    int mjmax;
+    int mnmax;
 }              t_d;
 
 typedef struct s_ls1
@@ -77,6 +79,8 @@ typedef struct s_ls1
     int ln;
     char *gr;
     char *pw;
+    int  major;
+    int    minor;
     mode_t st;
     struct s_ls1 *next;
 }               t_ls1;
