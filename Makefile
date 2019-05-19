@@ -6,7 +6,7 @@
 #    By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 01:56:31 by yelazrak          #+#    #+#              #
-#    Updated: 2019/05/12 23:29:13 by yelazrak         ###   ########.fr        #
+#    Updated: 2019/05/14 13:19:39 by yelazrak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = ft_ls
 SRCS = lsf.c\
 		ft_sort.c\
 		ft_flag.c\
+		test.c\
 
 OBJ =  $(SRCS:.c=.o)
 CC = gcc -Wall -Wextra -Werror 
